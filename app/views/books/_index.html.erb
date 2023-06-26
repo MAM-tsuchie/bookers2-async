@@ -19,10 +19,8 @@
         <% if book.user == current_user %>
           <td class="liked">♥<%= book.favorites.count.to_s %></td>
         <% else %>
-          <%= tag.td class: "#{book.favorited_by?(current_user) ? "liked" : ""}" do %>
-            <%= link_to book_favorites_path(book), method: book.favorited_by?(current_user) ? :delete : :post do %>
-              <%= "#{book.favorited_by?(current_user) ? "♥" : "♡"}"+book.favorites.count.to_s %>
-            <% end %>
+          <%= tag.td class: "favorite-btn favorite-btn-#{book.id} #{book.favorited_by?(current_user) ? "liked" : ""}" do %>
+            <%= render "favorites/favorite-btn", book: book %>
           <% end %>
         <% end %>
         <td>
